@@ -81,7 +81,7 @@ Note: Before reaching the last step, you should **not** touch the HTML. You _may
 
 ### first style
 
-![1st style](./style1-n.png "First Style")
+![1st style](./stylLoade1-n.png "First Style")
 
 ![1nd style mobile](./style1-mobile-n.png "First Style Mobile")
 
