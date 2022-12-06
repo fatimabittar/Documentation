@@ -43,6 +43,8 @@ figure img {
     float:left;
     position: absolute;
     left: 80%;
+    width:150px;
+    height: 150px;
 
 }
 .content{
@@ -196,7 +198,7 @@ ul{
 .contacts{
     display:flex;
     justify-content:space-evenly;
-    width:100%;
+    width:80%;
 }
 
 .contact-value::after{
