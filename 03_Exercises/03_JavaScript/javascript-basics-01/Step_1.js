@@ -1,2 +1,2 @@
-var name;
-alert("name");
+var name='fatima';
+alert(name);
