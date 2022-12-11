@@ -27,3 +27,16 @@ where name='Layal'
 
 
 Delete from students where ID= 4
+
+#join
+SELECT companies.Name, companies.Date,employees.Name
+FROM companies
+INNER JOIN employees ON companies.Name = employees.Company;
+
+SELECT companies.Name, companies.Date,employees.Name
+FROM companies
+INNER JOIN employees ON companies.Name = employees.Company where companies.date<2000
+
+SELECT companies.Name, companies.Date,employees.Name
+FROM companies
+INNER JOIN employees ON companies.Name = employees.Company where employees.Role='Graphic Designer'
