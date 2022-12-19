@@ -4,9 +4,8 @@ import './App.css';
 function App() {
   return (
     <div >
-    <h1>Fatima Bittar</h1>
+    <h1>Fatima Bittar and Nour Hmadi</h1>
     </div>
   );
 }
-
 export default App;
