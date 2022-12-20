@@ -2,7 +2,7 @@
 .container {
   width: 80%;
   margin: auto;
-
+  font-family: "Raleway";
 }
 h2{
   color:white;
@@ -18,8 +18,11 @@ h2{
   margin: auto;
   padding: auto;
   margin-top: 3.5vh; 
-  font-family:'Courier New', Courier, monospace;
-  font-size: 25px;
+  font-family: "Raleway";
+  font-size: 28px;
+}
+[name="search"]{
+  font-size: 23px ;
 }
 #city{
   border: none;
@@ -32,8 +35,8 @@ h2{
   background-color: #5879c7;
   border: none;
   height:40px;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
   padding-top: 1%;
   padding-bottom: 3%;
 }
