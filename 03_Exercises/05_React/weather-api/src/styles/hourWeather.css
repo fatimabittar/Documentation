@@ -1,0 +1,17 @@
+.icon {
+  width: 100px;
+  height: 100px;
+}
+
+.temp,
+.hour {
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  margin: auto;
+}
+
+.hour-weather {
+  display: flex;
+  flex-direction: column;
+}

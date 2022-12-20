@@ -1,0 +1,30 @@
+.search-container {
+  background-color: #759eda;
+  height: 13vh;
+}
+
+.search-container input {
+  margin: auto;
+  padding: auto;
+  margin-top: 3.5vh;
+  font-family: "Raleway";
+  font-size: 28px;
+}
+
+#city {
+  border: none;
+  background-color: #759eda;
+  padding-left: 20px;
+  color: white;
+  outline: none;
+}
+
+#search {
+  background-color: #5879c7;
+  border: none;
+  height: 40px;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 1%;
+  padding-bottom: 3%;
+}
