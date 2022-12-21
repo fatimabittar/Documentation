@@ -1,10 +1,13 @@
 import React from "react";
-
 import HourWeather from "./hourWeather";
+import partlycloudy from "../images/weather-icons/partlycloudy.svg";
 import mostlycloudy from "../images/weather-icons/mostlycloudy.svg";
 import clear from "../images/weather-icons/clear.svg";
 import rain from "../images/weather-icons/rain.svg";
-import clouds from "../images/weather-icons/cloudy.svg";
+import storm from "../images/weather-icons/storm.svg";
+import drizzle from "../images/weather-icons/drizzle.svg";
+import snow from "../images/weather-icons/snow.svg";
+import fog from "../images/weather-icons/fog.svg";
 import "../styles/currentWeather.css";
 
 function CurrentWeather(props) {
@@ -17,28 +20,42 @@ function CurrentWeather(props) {
   const hourWeatherList = list.slice(1, 8);
 
   let currentWeatherImg;
-  switch (currentWeather.weather[0].main) {
-    case "mostlycloudy":
-      currentWeatherImg = mostlycloudy;
+  const id = currentWeather.weather[0].id;
+  switch (true) {
+    case id < 300:
+      currentWeatherImg = storm;
       break;
-    case "Clear":
-      currentWeatherImg = clear;
+    case id < 500:
+      currentWeatherImg = drizzle;
       break;
-    case "Rain":
+    case id < 600:
       currentWeatherImg = rain;
       break;
-    case "Clouds":
-      currentWeatherImg = clouds;
+    case id < 700:
+      currentWeatherImg = snow;
+      break;
+    case id < 800:
+      currentWeatherImg = fog;
+      break;
+    case id === 800:
+      currentWeatherImg = clear;
+      break;
+    case id === 801:
+      currentWeatherImg = partlycloudy;
+      break;
+    case id < 806:
+      currentWeatherImg = mostlycloudy;
       break;
     default:
       break;
   }
+
   return (
     <div className="weather-container">
       <div className="current-weather-container">
         <img
           src={currentWeatherImg}
-          alt="current weather"
+          alt={currentWeather.weather[0].main}
           className="current-weather-img"
         />
         <h2>{currentWeather.weather[0].description}</h2>
@@ -59,6 +76,7 @@ function CurrentWeather(props) {
           <HourWeather
             hour={item.dt_txt.substring(11, 16)}
             imageName={item.weather[0].main}
+            imageId={item.weather[0].id}
             temperature={Math.round(item.main.temp)}
           />
         ))}
