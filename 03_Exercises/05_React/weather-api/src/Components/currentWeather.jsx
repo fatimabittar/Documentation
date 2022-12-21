@@ -8,6 +8,10 @@ import clouds from "../images/weather-icons/cloudy.svg";
 import "../styles/currentWeather.css";
 
 function CurrentWeather(props) {
+  if (props.list.length === 0) {
+    return <div className="weather-container"></div>;
+  }
+
   const { list } = props;
   const currentWeather = list[0];
   const hourWeatherList = list.slice(1, 8);
@@ -41,8 +45,8 @@ function CurrentWeather(props) {
         <div className="blue">
           <p className="bigger">
             <strong>Temperature</strong>{" "}
-            {Math.round(currentWeather.main.temp_min - 273.15)}°C to&nbsp;
-            {Math.round(currentWeather.main.temp_max - 273.15)}°C
+            {Math.round(currentWeather.main.temp_min)}°C to&nbsp;
+            {Math.round(currentWeather.main.temp_max)}°C
           </p>
           <p>
             <strong>Humidity</strong> {currentWeather.main.humidity}%&nbsp;
@@ -55,7 +59,7 @@ function CurrentWeather(props) {
           <HourWeather
             hour={item.dt_txt.substring(11, 16)}
             imageName={item.weather[0].main}
-            temperature={Math.round(item.main.temp - 273.15)}
+            temperature={Math.round(item.main.temp)}
           />
         ))}
       </div>
