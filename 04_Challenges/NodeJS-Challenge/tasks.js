@@ -40,6 +40,9 @@ function onDataReceived(text) {
   else if(text === 'hello\n'){
     hello();
   }
+  else if(text === 'help\n'){
+    help();
+  }
   else{
     unknownCommand(text);
   }
@@ -78,6 +81,15 @@ function quit(){
   process.exit();
 }
 
+/**
+ * Help the user
+ * @returns {void}
+ */
+
+ function help(){
+  var helpArr =["quit","hello"]; 
+  console.log('You have two commands:\n quit command \n hello command');
+}
 
 
 // The following line starts the application
