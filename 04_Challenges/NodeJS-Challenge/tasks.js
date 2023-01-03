@@ -83,7 +83,7 @@ function quit(){
 
 /**
  * Help the user
- * This function is supposed to help the user know the possible commands that he/she may use
+ * This function is supposed to help the user know the possible commands that he or she may use
  * @returns {void}
  */
 
