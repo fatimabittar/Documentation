@@ -156,7 +156,7 @@ function remove(c){
     tasks.splice(c-1,1);
   }
   else{
-    console.log('Error: You Should Provide the Number of the Task Required to Remove')
+    console.log('Error: This number does not exist');
   }
 }
 
