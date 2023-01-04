@@ -1,4 +1,8 @@
-
+// Some variables needed in the whole tasks application
+var tasks = [
+  "Do your homeworks",
+  "Enjoy your life"
+];
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -47,6 +51,9 @@ function onDataReceived(text) {
   else if(command === 'help'){
     help();
   }
+  else if(command === 'list'){
+    list();
+  }
   else{
     unknownCommand(command);
   }
@@ -67,7 +74,7 @@ function unknownCommand(c){
 
 /**
  * Says hello
- *
+ * @param  {string} c the arguement of hello command
  * @returns {void}
  */
 function hello(c){
@@ -93,14 +100,28 @@ function quit(){
 /**
  * Help the user
  * This function is supposed to help the user know the possible commands that he or she may use
+ * 
  * @returns {void}
  */
-
  function help(){
   var helpText= 'You have two commands:\n quit OR exit command \n hello command; takes one additional argument';
   console.log(helpText);
 }
 
 
+/**
+ * list all tasks
+ * 
+ * @returns {void}
+ */
+function list(){
+  for (i=0; i<tasks.length;i++){
+    console.log(`${i+1}'-'${tasks[i]}`)
+  }
+}
+
+
+
 // The following line starts the application
 startApp("Fatima Bittar")
+
