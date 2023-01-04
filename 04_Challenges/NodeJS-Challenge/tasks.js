@@ -40,19 +40,22 @@ function startApp(name){
 function onDataReceived(text) {
   text = text.trim();
   var words = text.split(' ');
-  var command = words[0];
-  console.log(words);
+  var command = words.shift();
+  
   if (command === 'quit' || command ==='exit') {
     quit();
   }
   else if(command === 'hello'){
-    hello(words[1]);
+    hello(words.join(' '));
   }
   else if(command === 'help'){
     help();
   }
   else if(command === 'list'){
     list();
+  }
+  else if(command === 'add'){
+    add(words.join(' '));
   }
   else{
     unknownCommand(command);
@@ -116,7 +119,21 @@ function quit(){
  */
 function list(){
   for (i=0; i<tasks.length;i++){
-    console.log(`${i+1}'-'${tasks[i]}`)
+    console.log(`${i+1} - ${tasks[i]}`)
+  }
+}
+
+/**
+ * Add task
+ * 
+ * @returns {void}
+ */
+function add(task){
+  if(task){
+  tasks.push(task);
+  }
+  else{
+    console.log('Error: You Should Provide a Task');
   }
 }
 
