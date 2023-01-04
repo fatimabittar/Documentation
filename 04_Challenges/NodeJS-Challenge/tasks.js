@@ -57,6 +57,9 @@ function onDataReceived(text) {
   else if(command === 'add'){
     add(words.join(' '));
   }
+  else if(command=== 'remove'){
+    remove(Number(words[0]));
+  }
   else{
     unknownCommand(command);
   }
@@ -136,7 +139,20 @@ function add(task){
     console.log('Error: You Should Provide a Task');
   }
 }
-
+/**
+ * Remove task
+ * 
+ * @returns {void}
+ * @param  {number} c the number recieved 
+ */
+function remove(c){
+  if(typeof c === 'number' && c>0 && c<=tasks.length){
+    tasks.splice(c-1,1);
+  }
+  else{
+    console.log('Error: You Should Provide the Number of the Task Required to Remove')
+  }
+}
 
 
 // The following line starts the application
