@@ -110,7 +110,13 @@ function quit(){
  * @returns {void}
  */
  function help(){
-  var helpText= 'You have two commands:\n quit OR exit command \n hello command; takes one additional argument';
+  var helpText= 'Available commands: \n'
+  + 'quit OR exit: Quit the application \n'
+  + 'hello: Takes one additional argument \n'
+  + 'list: Lists all the tasks \n'
+  + 'add: Add new task \n'
+  + 'remove: remove specific task \n';
+
   console.log(helpText);
 }
 
