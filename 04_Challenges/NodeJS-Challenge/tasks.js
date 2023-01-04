@@ -97,7 +97,7 @@ function quit(){
  */
 
  function help(){
-  var helpText= 'You have two commands:\n quit OR exit command \n hello command';
+  var helpText= 'You have two commands:\n quit OR exit command \n hello command; takes one additional argument';
   console.log(helpText);
 }
 
