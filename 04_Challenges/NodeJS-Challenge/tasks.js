@@ -10,11 +10,11 @@
  * @returns {void}
  */
 function startApp(name){
-  process.stdin.resume();
+  process.stdin.resume(); //restart, stdin is the reading from the user
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
-  console.log(`Welcome to ${name}'s application!`)
-  console.log("--------------------")
+  console.log(`Welcome to ${name}'s application!`);
+  console.log("--------------------");
 }
 
 
@@ -34,17 +34,21 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n' || text ==='exit\n') {
+  text = text.trim();
+  var words = text.split(' ');
+  var command = words[0];
+  console.log(words);
+  if (command === 'quit' || command ==='exit') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
+  else if(command === 'hello'){
+    hello(words[1]);
   }
-  else if(text === 'help\n'){
+  else if(command === 'help'){
     help();
   }
   else{
-    unknownCommand(text);
+    unknownCommand(command);
   }
 }
 
@@ -66,8 +70,13 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(c){
+  if(c) {
+    console.log(`hello ${c.trim()}!`);
+
+  } else{
+    console.log('hello!');
+  }
 }
 
 
@@ -88,8 +97,8 @@ function quit(){
  */
 
  function help(){
-  var helpArr =["quit","hello"]; 
-  console.log('You have two commands:\n quit command \n hello command');
+  var helpText= 'You have two commands:\n quit OR exit command \n hello command';
+  console.log(helpText);
 }
 
 
