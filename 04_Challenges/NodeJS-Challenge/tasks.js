@@ -90,6 +90,14 @@ function onDataReceived(text) {
       check();
     }
   }
+  else if(command === 'uncheck'){
+    if(words[0]){
+      unCheck(Number(words[0]));
+    }
+    else{
+      unCheck();
+    }
+  }
 
   else{
     unknownCommand(command);
@@ -141,15 +149,16 @@ function quit(){
  * @returns {void}
  */
  function help(){
-  
+
   var helpText= 'Available commands: \n'
   + 'quit OR exit: Quit the application \n'
   + 'hello: Takes one additional argument \n'
   + 'list: Lists all the tasks \n'
   + 'add: Add new task \n'
-  + 'remove: remove specific task \n'
-  + 'edit: edit the text of the task \n'
-  + 'check: check and uncheck the task \n';
+  + 'remove: Remove specific task \n'
+  + 'edit: Edit the text of the task \n'
+  + 'check: Check the task \n';
+  + 'uncheck: Uncheck the task \n';
 
   console.log(helpText);
 }
@@ -194,7 +203,7 @@ function add(task){
  * @param  {number} c the number recieved 
  */
 function remove(c){
-  if(typeof c === 'number' && c>0 && c<=tasks.length){
+  if(tasks[c-1]){
     tasks.splice(c-1,1);
   }
   else if ( c === undefined){
@@ -232,7 +241,7 @@ function edit(task, index){
  */
 function check (index){
   
-  if(tasks[index]){
+  if(tasks[index-1]){
     tasks[index-1].done=true;
   }
   else if(index === undefined ){
@@ -242,6 +251,19 @@ function check (index){
     console.log('Error: This number does not exist'); 
   }
 }
+function unCheck (index){
+  if(tasks[index-1]){
+    tasks[index-1].done=false;
+  }
+  else if(index === undefined ){
+    console.log('Error: You must provide a number'); 
+  }
+  else{
+    console.log('Error: This number does not exist'); 
+  }
+}
+
+
 
 
 // The following line starts the application
