@@ -57,14 +57,28 @@ function onDataReceived(text) {
   else if(command === 'add'){
     add(words.join(' '));
   }
-  else if(command=== 'remove'){
+  else if(command === 'remove'){
     if(words[0]){
       remove(Number(words[0]));
     }
+
     else{
       remove()
     }
   }
+
+  else if(command === 'edit'){
+    // edit 1 go to the gym
+    // ['1','go','to','']
+    if(!isNaN(Number(words[0]))){
+      const index = Number(words.shift());
+      edit(words.join(' '), index);
+    }
+    else{
+     edit(words.join(' '));
+    }
+  }
+
   else{
     unknownCommand(command);
   }
@@ -166,6 +180,26 @@ function remove(c){
   else{
     console.log('Error: This number does not exist');
   }
+}
+/**
+ * Remove task
+ * 
+ * @returns {void}
+ * @param  {string} task the task needed to be edited 
+ * @param  {number} index the number of the task to be edited
+ */
+function edit(task, index){
+  if(task && index){
+    tasks[index-1]=task;
+  }
+  else if (task){
+    tasks.pop();
+    tasks.push(task);
+  }
+  else{
+    console.log('Error: You Should Provide a Task');
+  }
+
 }
 
 
