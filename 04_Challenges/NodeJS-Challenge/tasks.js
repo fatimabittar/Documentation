@@ -141,12 +141,15 @@ function quit(){
  * @returns {void}
  */
  function help(){
+  
   var helpText= 'Available commands: \n'
   + 'quit OR exit: Quit the application \n'
   + 'hello: Takes one additional argument \n'
   + 'list: Lists all the tasks \n'
   + 'add: Add new task \n'
-  + 'remove: remove specific task \n';
+  + 'remove: remove specific task \n'
+  + 'edit: edit the text of the task \n'
+  + 'check: check and uncheck the task \n';
 
   console.log(helpText);
 }
@@ -221,6 +224,12 @@ function edit(task, index){
 
 }
 
+/**
+ * Check task
+ * 
+ * @returns {void}
+ * @param  {number} index the number of the task to be checked/unchecked
+ */
 function check (index){
   
   if(tasks[index]){
