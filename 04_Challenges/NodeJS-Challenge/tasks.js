@@ -82,6 +82,15 @@ function onDataReceived(text) {
     }
   }
 
+  else if(command === 'check'){
+    if(words[0]){
+      check(Number(words[0]));
+    }
+    else{
+      check();
+    }
+  }
+
   else{
     unknownCommand(command);
   }
@@ -193,7 +202,7 @@ function remove(c){
   }
 }
 /**
- * Remove task
+ * edit task
  * 
  * @returns {void}
  * @param  {string} task the task needed to be edited 
@@ -210,6 +219,19 @@ function edit(task, index){
     console.log('Error: You Should Provide a Task');
   }
 
+}
+
+function check (index){
+  
+  if(tasks[index]){
+    tasks[index-1].done=true;
+  }
+  else if(index === undefined ){
+    console.log('Error: You must provide a number'); 
+  }
+  else{
+    console.log('Error: This number does not exist'); 
+  }
 }
 
 
