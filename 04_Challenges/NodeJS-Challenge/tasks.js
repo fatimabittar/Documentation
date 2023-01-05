@@ -58,7 +58,12 @@ function onDataReceived(text) {
     add(words.join(' '));
   }
   else if(command=== 'remove'){
-    remove(Number(words[0]));
+    if(words[0]){
+      remove(Number(words[0]));
+    }
+    else{
+      remove()
+    }
   }
   else{
     unknownCommand(command);
@@ -80,7 +85,7 @@ function unknownCommand(c){
 
 /**
  * Says hello
- * @param  {string} c the arguement of hello command
+ * @param  {string} c the argument of hello command
  * @returns {void}
  */
 function hello(c){
@@ -154,6 +159,9 @@ function add(task){
 function remove(c){
   if(typeof c === 'number' && c>0 && c<=tasks.length){
     tasks.splice(c-1,1);
+  }
+  else if ( c === undefined){
+    tasks.pop();
   }
   else{
     console.log('Error: This number does not exist');
