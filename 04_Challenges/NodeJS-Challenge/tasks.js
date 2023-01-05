@@ -3,7 +3,9 @@ var tasks = [
 
   {task: 'Do your homeworks', done: false},
   {task: 'Enjoy your life', done: false},
+  {task: 'Attend the gym', done: true},
 ];
+
 /**
  * Starts the application
  * This is the function that is run when the app starts
@@ -148,7 +150,15 @@ function quit(){
  */
 function list(){
   for (i=0; i<tasks.length;i++){
-    console.log(`${i+1} - ${tasks[i].task} - ${tasks[i].done}`)
+    var message = `${i+1} - ${tasks[i].task}`;
+   
+    if (tasks[i].done ===true){
+     message+=' [✓]';
+    }
+    else{
+      message+=' [ ]';
+    }
+    console.log(message);
   }
 }
 
