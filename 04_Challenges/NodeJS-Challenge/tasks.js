@@ -1,7 +1,8 @@
 // Some variables needed in the whole tasks application
 var tasks = [
-  "Do your homeworks",
-  "Enjoy your life"
+
+  {task: 'Do your homeworks', done: false},
+  {task: 'Enjoy your life', done: false},
 ];
 /**
  * Starts the application
@@ -147,7 +148,7 @@ function quit(){
  */
 function list(){
   for (i=0; i<tasks.length;i++){
-    console.log(`${i+1} - ${tasks[i]}`)
+    console.log(`${i+1} - ${tasks[i].task} - ${tasks[i].done}`)
   }
 }
 
@@ -158,7 +159,7 @@ function list(){
  */
 function add(task){
   if(task){
-  tasks.push(task);
+  tasks.push({task, done: false});
   }
   else{
     console.log('Error: You Should Provide a Task');
@@ -190,11 +191,10 @@ function remove(c){
  */
 function edit(task, index){
   if(task && index){
-    tasks[index-1]=task;
+    tasks[index-1].task=task;
   }
   else if (task){
-    tasks.pop();
-    tasks.push(task);
+    tasks[tasks.length-1].task = task;
   }
   else{
     console.log('Error: You Should Provide a Task');
