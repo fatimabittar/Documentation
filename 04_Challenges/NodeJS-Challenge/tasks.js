@@ -1,10 +1,13 @@
 // Some variables needed in the whole tasks application
-var tasks = [
-
-  {task: 'Do your homeworks', done: false},
-  {task: 'Enjoy your life', done: false},
-  {task: 'Attend the gym', done: true},
-];
+// fs is required to read or write from any file like stdin that reads from the CLI
+const { log } = require("console");
+const fs = require("fs");
+var tasks = [];
+fs.readFile('database.json','utf-8', function(err,data){
+  if (!err){
+  tasks= JSON.parse(data).tasks;
+  }
+})
 
 /**
  * Starts the application
@@ -139,7 +142,14 @@ function hello(c){
  */
 function quit(){
   console.log('Quitting now, goodbye!')
-  process.exit();
+
+  fs.writeFile('database.json',JSON.stringify({tasks:tasks}),'utf-8',function(err){
+    if (err){
+      console.log("Error: error happened while writing to database file")
+    }
+    process.exit();
+  })
+
 }
 
 /**
