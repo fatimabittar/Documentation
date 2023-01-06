@@ -2,12 +2,9 @@
 // fs is required to read or write from any file like stdin that reads from the CLI
 const { log } = require("console");
 const fs = require("fs");
+var fileName= "database.json";
 var tasks = [];
-fs.readFile('database.json','utf-8', function(err,data){
-  if (!err){
-  tasks= JSON.parse(data).tasks;
-  }
-})
+
 
 /**
  * Starts the application
@@ -25,6 +22,15 @@ function startApp(name){
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`);
   console.log("--------------------");
+  console.log(process.argv);
+  if(process.argv[2]){
+    fileName=process.argv[2];
+  }
+  fs.readFile(fileName,'utf-8', function(err,data){
+    if (!err){
+    tasks= JSON.parse(data).tasks;
+    }
+  })
 }
 
 
@@ -143,7 +149,7 @@ function hello(c){
 function quit(){
   console.log('Quitting now, goodbye!')
 
-  fs.writeFile('database.json',JSON.stringify({tasks:tasks}),'utf-8',function(err){
+  fs.writeFile(fileName,JSON.stringify({tasks:tasks}),'utf-8',function(err){
     if (err){
       console.log("Error: error happened while writing to database file")
     }
