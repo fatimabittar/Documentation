@@ -60,8 +60,14 @@ app.get("/movies/read", (req, res) => {
 app.get("/movies/update", (req, res) => {
     res.json({status:200, message:"ok"});
 });
-app.get("/movies/delete", (req, res) => {
-    res.json({status:200, message:"ok"});
+app.get("/movies/delete/:id", (req, res) => {
+    const id=req.params.id-1;
+    if (movies[id]){
+    movies.splice(id,1)
+    res.json({status:200, data:movies});
+    }
+    else
+    res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
 });
 
 app.get("/movies/read/by-date", (req, res) => {
