@@ -64,8 +64,14 @@ app.get("/movies/read/by-title", (req, res) => {
     res.json({status:200, data: byTitle});
 });
 
-
-
+app.get("/movies/read/id/:id", (req, res) => {
+    const id=req.params.id-1;
+    if (movies[id]){
+    res.json({status:200, data: movies[id]});
+    }
+    else
+    res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+});
 
 app.listen(4000, () => {
     console.log("Listen on the port 4000...");
