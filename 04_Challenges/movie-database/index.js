@@ -54,20 +54,46 @@ app.get("/movies/create", (req, res) => {
     }
 });
 
-app.get("/movies/read", (req, res) => {
-    res.json({status:200, data: movies});
+
+app.get("/movies/update/:id", (req, res) => {
+    const id=req.params.id-1;
+    const title=req.query.title;
+    const year=req.query.year;
+    const rating=req.query.rating;
+
+    if (movies[id]){
+        if (title) {
+            movies[id].title = title;
+        }
+        if (year && year.length===4 && !isNaN(Number(year))) {
+            movies[id].year = year;
+        }
+        if (rating && !isNaN(Number(rating))) {
+            movies[id].rating = rating;
+        }
+        res.json({status:200, data:movies});
+    }
+    else{
+        res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+    }
 });
-app.get("/movies/update", (req, res) => {
-    res.json({status:200, message:"ok"});
-});
+
+
 app.get("/movies/delete/:id", (req, res) => {
     const id=req.params.id-1;
     if (movies[id]){
-    movies.splice(id,1)
-    res.json({status:200, data:movies});
+        movies.splice(id,1)
+        res.json({status:200, data:movies});
     }
-    else
-    res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+    else{
+        res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+    }
+});
+
+
+
+app.get("/movies/read", (req, res) => {
+    res.json({status:200, data: movies});
 });
 
 app.get("/movies/read/by-date", (req, res) => {
