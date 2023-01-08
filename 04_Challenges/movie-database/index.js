@@ -49,6 +49,21 @@ app.get("/movies/delete", (req, res) => {
     res.json({status:200, message:"ok"});
 });
 
+app.get("/movies/read/by-date", (req, res) => {
+    const byDate = movies.sort((a,b) => {return a.year - b.year});
+
+    res.json({status:200, data: byDate});
+});
+app.get("/movies/read/by-rating", (req, res) => {
+    const byRating = movies.sort((a,b) => {return a.rating - b.rating});
+    res.json({status:200, data: byRating});
+});
+app.get("/movies/read/by-title", (req, res) => {
+
+    const byTitle = movies.sort((a,b) => {return a.title.localeCompare(b.title)});
+    res.json({status:200, data: byTitle});
+});
+
 
 
 
