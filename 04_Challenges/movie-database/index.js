@@ -1,5 +1,11 @@
 const express = require("express");
 const app = express();
+const movies = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
 
 app.get("/", (req, res) => {
     res.status(200).send("ok");
@@ -28,6 +34,22 @@ app.get("/search", (req, res) => {
         res.status(500).json({status:500, error:true, message:"you have to provide a search"});
     }
 });
+
+//Movies
+app.get("/movies/create", (req, res) => {
+    res.json({status:200, message:"ok"});
+});
+app.get("/movies/read", (req, res) => {
+    res.json({status:200, data: movies});
+});
+app.get("/movies/update", (req, res) => {
+    res.json({status:200, message:"ok"});
+});
+app.get("/movies/delete", (req, res) => {
+    res.json({status:200, message:"ok"});
+});
+
+
 
 
 app.listen(4000, () => {
