@@ -36,89 +36,85 @@ app.get("/search", (req, res) => {
 });
 
 //Movies
-app.get("/movies/create", (req, res) => {
-    const title=req.query.title;
-    const year=req.query.year;
-    const rating=req.query.rating;
-
-    if(title && year && year.length===4 && !isNaN(Number(year))){
-        if(rating && !isNaN(Number(rating)))
-            movies.push({title,year,rating});
-        else{
-            movies.push({title,year,rating:4});
-        }
+app.route("/movies")
+    .get((req, res) => {
         res.json({status:200, data: movies});
-    }
-    else {
-        res.status(403).json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'});
-    }
-});
+    })
+    .post((req, res) => {
+        const title=req.query.title;
+        const year=req.query.year;
+        const rating=req.query.rating;
 
+        if(title && year && year.length===4 && !isNaN(Number(year))){
+            if(rating && !isNaN(Number(rating)))
+                movies.push({title,year,rating});
+            else{
+                movies.push({title,year,rating:4});
+            }
+            res.json({status:200, data: movies});
+        }
+        else {
+            res.status(403).json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'});
+        }
+    });
 
-app.get("/movies/update/:id", (req, res) => {
-    const id=req.params.id-1;
-    const title=req.query.title;
-    const year=req.query.year;
-    const rating=req.query.rating;
-
-    if (movies[id]){
-        if (title) {
-            movies[id].title = title;
+app.route("/movies/:id")
+    .get((req, res) => {
+        const id=req.params.id-1;
+        if (movies[id]){
+        res.json({status:200, data: movies[id]});
         }
-        if (year && year.length===4 && !isNaN(Number(year))) {
-            movies[id].year = year;
-        }
-        if (rating && !isNaN(Number(rating))) {
-            movies[id].rating = rating;
-        }
-        res.json({status:200, data:movies});
-    }
-    else{
+        else
         res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
-    }
-});
+    })
+    .patch((req, res) => {
+        const id=req.params.id-1;
+        const title=req.query.title;
+        const year=req.query.year;
+        const rating=req.query.rating;
+    
+        if (movies[id]){
+            if (title) {
+                movies[id].title = title;
+            }
+            if (year && year.length===4 && !isNaN(Number(year))) {
+                movies[id].year = year;
+            }
+            if (rating && !isNaN(Number(rating))) {
+                movies[id].rating = rating;
+            }
+            res.json({status:200, data:movies});
+        }
+        else{
+            res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+        }
+    })
+    .delete((req, res) => {
+        const id=req.params.id-1;
+        if (movies[id]){
+            movies.splice(id,1)
+            res.json({status:200, data:movies});
+        }
+        else{
+            res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
+        }
+    });
 
-
-app.get("/movies/delete/:id", (req, res) => {
-    const id=req.params.id-1;
-    if (movies[id]){
-        movies.splice(id,1)
-        res.json({status:200, data:movies});
-    }
-    else{
-        res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
-    }
-});
-
-
-
-app.get("/movies/read", (req, res) => {
-    res.json({status:200, data: movies});
-});
-
-app.get("/movies/read/by-date", (req, res) => {
+app.get("/movies/by-date", (req, res) => {
     const byDate = movies.sort((a,b) => {return a.year - b.year});
 
     res.json({status:200, data: byDate});
 });
-app.get("/movies/read/by-rating", (req, res) => {
+app.get("/movies/by-rating", (req, res) => {
     const byRating = movies.sort((a,b) => {return a.rating - b.rating});
     res.json({status:200, data: byRating});
 });
-app.get("/movies/read/by-title", (req, res) => {
+app.get("/movies/by-title", (req, res) => {
 
     const byTitle = movies.sort((a,b) => {return a.title.localeCompare(b.title)});
     res.json({status:200, data: byTitle});
 });
 
-app.get("/movies/read/id/:id", (req, res) => {
-    const id=req.params.id-1;
-    if (movies[id]){
-    res.json({status:200, data: movies[id]});
-    }
-    else
-    res.status(404).json({status:404, error:true, message:'the movie <ID> does not exist'});
-});
 
 app.listen(4000, () => {
     console.log("Listen on the port 4000...");
