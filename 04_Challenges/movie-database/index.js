@@ -37,8 +37,23 @@ app.get("/search", (req, res) => {
 
 //Movies
 app.get("/movies/create", (req, res) => {
-    res.json({status:200, message:"ok"});
+    const title=req.query.title;
+    const year=req.query.year;
+    const rating=req.query.rating;
+
+    if(title && year && year.length===4 && !isNaN(Number(year))){
+        if(rating && !isNaN(Number(rating)))
+            movies.push({title,year,rating});
+        else{
+            movies.push({title,year,rating:4});
+        }
+        res.json({status:200, data: movies});
+    }
+    else {
+        res.status(403).json({status:403, error:true, message:'you cannot create a movie without providing a title and a year'});
+    }
 });
+
 app.get("/movies/read", (req, res) => {
     res.json({status:200, data: movies});
 });
